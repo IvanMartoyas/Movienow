@@ -17,3 +17,56 @@
         cursor: pointer;
     }
 }
+
+.filmCard {
+    display: flex;
+    justify-content: space-between;
+    background-color: $color-bg-card;
+    margin-top: 40px;
+}
+.filmCard__img {
+    width: 170px;
+    padding: 45px 30px;
+}
+.filmCard__content {
+    width: 100%;
+    font-family: 'Roboto';
+    font-style: normal;
+    padding: 30px;
+}
+
+.filmCard__title {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 36px;
+}
+.filmCard__tags {
+    span {
+        color: $color-category;
+    }
+}
+.filmCard__date {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+}
+.filmCard__category {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    color: $color-category;
+    text-transform: uppercase;
+}
+.filmCard__producer {
+    span {
+        color: $color-category;
+    }
+}
+.filmCard__actors {
+    span {
+        color: $color-category;
+    }
+}
+.filmCard__description {
+    color: $color-description-card;
+}
