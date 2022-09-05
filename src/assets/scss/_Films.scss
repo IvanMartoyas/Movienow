@@ -1,0 +1,19 @@
+.sortForm {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 25px 0;
+    color: $color-label;
+    border-bottom: 1px solid $color-label;
+    input {
+        border-color:  $color-label;
+        background: $color-background;
+        width: 15px;
+        height: 15px;
+    }
+    label {
+        margin-left: 15px;
+        margin-right: 60px;
+        cursor: pointer;
+    }
+}
