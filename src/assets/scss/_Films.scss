@@ -1,3 +1,25 @@
+.Films {
+    padding-top: 30px;
+    height: calc(100% - 100px);
+}
+.FilmsHeader {
+    height: 100px;
+
+    @media screen and (max-width: $tableWidth) {
+        height: auto;
+    }
+    @media screen and (max-width: $phoneWidth) {
+        height: auto;
+    }
+}
+.FilmsList__wrapper, .FilmsHeader {
+    max-width: $desktopWidth;
+    margin: 0 auto;
+    padding: 0 15px;
+    @media screen and (max-width: $phoneWidth) {
+        padding: 0;
+    }
+}
 .sortForm {
     display: flex;
     justify-content: start;
@@ -16,6 +38,24 @@
         margin-right: 60px;
         cursor: pointer;
     }
+
+    @media screen and (max-width: $tableWidth) {
+        display: block;
+        input {
+            margin-bottom: 15px;
+        }
+    }
+    @media screen and (max-width: $phoneWidth) {
+        display: block;
+        input {
+            margin-bottom: 15px;
+        }
+        label {
+            margin-right: 0;
+            font-size: 16px;
+            margin-left: 5px;
+        }
+    }
 }
 
 .filmCard {
@@ -23,6 +63,14 @@
     justify-content: space-between;
     background-color: $color-bg-card;
     margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+
+    
+    @media screen and (max-width: $phoneWidth) {
+        display: block;
+    }
+
 }
 .filmCard__img {
     width: 170px;
@@ -39,6 +87,8 @@
     font-weight: 700;
     font-size: 36px;
     line-height: 36px;
+    color: $default-color;
+    margin-bottom: 15px;
 }
 .filmCard__tags {
     span {
@@ -58,15 +108,67 @@
     text-transform: uppercase;
 }
 .filmCard__producer {
+    text-transform: uppercase;
+    padding-top: 10px;
     span {
         color: $color-category;
     }
 }
 .filmCard__actors {
+    padding: 10px 0;
     span {
         color: $color-category;
     }
 }
 .filmCard__description {
+    margin-top: 20px;
     color: $color-description-card;
 }
+.filmCard__mark {
+    position: absolute;
+    right: -4px;
+    top: 30px;
+    padding: 8px 18px;
+    background: $color-label;
+    color: $color-logo;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 12px;
+    letter-spacing: 0em;
+    text-align: right;
+    display: flex;
+    -webkit-transform: skew(-10deg);
+    -moz-transform: skew(-10deg);
+    -o-transform: skew(-10deg);
+    align-items: center;
+    justify-content: space-between;
+
+    .filmCard__icon {
+        margin-left: 12px;
+    }
+
+    @media screen and (max-width: $phoneWidth) {
+        position: initial;
+        margin: 5px 0;
+        transform: none;
+        position: static;
+        margin: 5px 0;
+        color: #fff;
+        padding: 5px 0;
+        justify-content: start;
+        background: $color-bg-card;
+    }
+    @media screen and (max-width: $tableWidth) {
+        position: initial;
+        margin: 5px 0;
+        transform: none;
+        position: static;
+        margin: 5px 0;
+        color: #fff;
+        padding: 5px 0;
+        justify-content: start;
+        background: $color-bg-card;
+    }
+}
+

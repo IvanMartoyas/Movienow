@@ -1,6 +1,6 @@
 <template>
-    <div class="wrapper">
-        <header>
+    <div class="wrapper layout">
+        <header class="layout__header">
             <div class="logo">#movienow</div>
         </header>
         <main>

@@ -3,6 +3,7 @@
 @import 'utils/mixins';
 @import 'utils/fonts';
 @import 'utils/reset';
+@import '_loader';
 @import '_layout';
 @import '_Films';
 
@@ -23,6 +24,7 @@ html {
 }
 
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
   font-family: $mainFont;
@@ -77,7 +79,6 @@ section,
   flex-direction: column;
   margin: 0 auto;
   min-height: 100vh;
-  min-width: 100vh;
 }
 
 .content-wrapper {
@@ -101,6 +102,15 @@ section,
   @media screen and (max-width: $phoneWidth) {
     max-width: $smPhoneWidth;
   }
+}
+
+.Error {
+  color: $default-color;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 32px;
+  padding: 30px 0;
+
 }
 
 // Modules:

@@ -5,13 +5,13 @@ body {
     line-height: 20px;
     background: $color-background;
 }
-header {
+.layout__header {
     width: 100%;
     background: $color-header;
     color: $color-logo;
     padding-top: 20px;
     padding-bottom: 10px;
-    margin-bottom: 20px;
+    height: 80px;
 }
 .logo {
     font-family: Roboto;
@@ -21,12 +21,44 @@ header {
     letter-spacing: 0.21em;
     text-align: center;    
     text-transform: uppercase;
+
+    @media screen and (max-width: $phoneWidth) {
+      font-size: 28px;
+    }
 }
 main {
-    max-width: $desktopWidth;
     margin: 0 auto;
     width: 100%;
+    height: calc(100vh - 80px);
+    overflow-y: scroll;
 }
+
+// scroll
+/* Firefox */
+  main {
+    scrollbar-width: auto;
+    scrollbar-color: $color-logo $color-background;
+  
+    @media screen and (max-width: $phoneWidth) {
+        padding: 0 10px;
+    }
+  }
+  
+  /* Chrome, Edge, and Safari */
+  main::-webkit-scrollbar {
+    width: 16px;
+  }
+  
+  main::-webkit-scrollbar-track {
+    background: $color-background;
+  }
+  
+  main::-webkit-scrollbar-thumb {
+    background-color: $color-logo;
+    border-radius: 10px;
+    border: 3px solid $color-background ;
+  }
+
 h1 {
     font-family: 'Roboto';
     font-style: normal;
@@ -35,3 +67,5 @@ h1 {
     line-height: 32px;
     color: $default-color;
 }
+
+
