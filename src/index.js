@@ -10,10 +10,16 @@ import './assets/scss/main.scss'
 // Vue.js
 window.Vue = require('vue')
 
+
 // Vue components (for use in html)
 Vue.component('App', require('./js/App.vue').default)
 
+// add vue router
+import router from './js/router.js';
+
 // Vue init
 const app = new Vue({
-  el: '#app'
-})
+  el: '#app',
+  router
+}).$mount('#app')
+

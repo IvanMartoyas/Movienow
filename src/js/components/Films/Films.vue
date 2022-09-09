@@ -11,13 +11,13 @@
         <div class="FilmsList" v-else>   
             <div class="FilmsList__wrapper">
 
-                <div class="filmCard" v-for="film in films" :key="film.id">
+                <div class="filmCard" v-for="(film, i) in films" :key="film.id">
                     <div class="filmCard__img">
                         <!-- <img :src="linkImg(film.poster)" alt="film.title"> -->
                     </div>
                     <div class="filmCard__content">
                     
-                        <div class="filmCard__title">
+                        <div class="filmCard__title" @click="linkFilm(i)">
                             {{film.title}}
                         </div>
                         <div class="filmCard__mark" v-if="film.collapse.duration">
@@ -34,9 +34,9 @@
                             <span class="filmCard__date" v-if="film.year" >{{ film.year + ", "  }}</span>
                             <span class="filmCard__category" v-if="film.genres" >{{joinObject(film.genres)}} </span>
                         </div>
-                        <div class="filmCard__producer" v-if="film.directors" ><span>Режиссёр: {{ joinObject(film.directors) }}</span></div>
-                        <div class="filmCard__actors" v-if="film.actors" ><span>Актёры: {{" " + joinObject(film.actors) }}</span></div>
-                        <div class="filmCard__description" v-if="film.description"  >
+                        <div class="filmCard__producer"     v-if="film.directors" ><span>Режиссёр: {{ joinObject(film.directors) }}</span></div>
+                        <div class="filmCard__actors"       v-if="film.actors" ><span>Актёры: {{" " + joinObject(film.actors) }}</span></div>
+                        <div class="filmCard__description"  v-if="film.description"  >
                             {{film.description}}
                         </div>
                     </div>
@@ -65,13 +65,12 @@
             }
         },
         mounted() {
-        
             axios.get('https://floating-sierra-20135.herokuapp.com/api/movies').then(response => {
                 
                 this.loader = false;
          
                 this.films = response.data.data;
-                console.log("this.films  ",this.films )
+                // console.log("this.films  ",this.films )
        
             }).catch(e=>{
                 console.log("rerror: ",e);
@@ -86,21 +85,7 @@
                 for (let i in array) {
                     string += array[i] + ", ";
                 }
-
-                // console.log("string typeof ", typeof string)
-                
                 return string.slice(0, -2);
-            },
-            linkImg(link) {
-                // console.log("link id ",link)
-                // console.log("link  ",link)
-                // link = link.split("/");
-                // link = link[4].split(".")
-                // link = link[0];
-                
-                
-             
-                return `https:${link}`
             },
             sortfilms(value) {
                 
@@ -124,7 +109,30 @@
                     
                 }
 
-                console.log("value ", value)
+           
+            },
+            linkFilm(id) {
+
+                let query = {
+                        id:             this.films[id].id || false,
+                        title:          this.films[id].title || false,
+                        year:           this.films[id].year || false,
+                        genres:         this.films[id].genres || false,
+                        directors:      this.films[id].directors || false,
+                        actors:         this.films[id].actors || false,
+                        description:    this.films[id].description || false,
+                        trailer:        this.films[id].trailer || false,
+                        rating_imdb:    this.films[id].rating_imdb || false,
+                        frames:         this.films[id].frames || false
+                }
+                
+                if(this.films[id].collapse.duration) {
+                    query.duration = this.films[id].collapse.duration;
+                }
+
+                return this.$router.push({ name: 'film', query });
+
+             
             }
         }
     }

@@ -70,6 +70,9 @@
     @media screen and (max-width: $phoneWidth) {
         display: block;
     }
+    @media screen and (max-width: $tableWidth) {
+        display: block;
+    }
 
 }
 .filmCard__img {
@@ -89,6 +92,7 @@
     line-height: 36px;
     color: $default-color;
     margin-bottom: 15px;
+    cursor: pointer;
 }
 .filmCard__tags {
     span {
@@ -172,3 +176,34 @@
     }
 }
 
+
+//film
+.Film {
+    position: relative;
+    padding-top: 30px;
+    color: $default-color;
+    .filmCard__title {
+        cursor: default;
+    }
+}
+
+.Film__galary {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    img {
+        object-fit: cover;
+        height: 100%;
+    }
+}
+.Film__info {
+    margin: 10px 0;
+}
+.Film__rating {
+
+}
+.Film__back {
+    cursor: pointer;
+    color: $default-color;
+}
