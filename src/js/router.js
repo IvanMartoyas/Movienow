@@ -7,7 +7,7 @@ import Films from './components/Films/Films.vue'
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     { path: "/", component: Films},
     { path: "/home",  name: 'Home', component: Films},

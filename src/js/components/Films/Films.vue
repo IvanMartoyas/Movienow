@@ -13,7 +13,7 @@
 
                 <div class="filmCard" v-for="(film, i) in films" :key="film.id">
                     <div class="filmCard__img">
-                        <!-- <img :src="linkImg(film.poster)" alt="film.title"> -->
+                        <img :src="getPoster(film.poster)" alt="film.title">
                     </div>
                     <div class="filmCard__content">
                     
@@ -52,6 +52,20 @@
     import Loader from '@/components/Loader.vue'
     import axios from 'axios';
 
+    /*
+        компонент отрисовывает список фильмов
+
+        методы 
+        joinObject преобразует поля обьекта в строку, и выводит их через запятую, нужен чтобы вывести имена актёров строкой 
+        sortfilms принимает готовый отсортированный масив фильмов из Films-sort
+        linkFilm делает переход в выбранную карточку, копируя все данные в строке GET запроса
+        getPoster метод исправляет ссылку для постера которая изначально нерабочая
+
+        поля
+        loader - лоадер
+        films массив фильмов
+        error показывает ошибки  
+    */
     export default {
         components: {
             FilmsSort,
@@ -65,20 +79,21 @@
             }
         },
         mounted() {
-            axios.get('https://floating-sierra-20135.herokuapp.com/api/movies').then(response => {
-                
-                this.loader = false;
-         
-                this.films = response.data.data;
-                // console.log("this.films  ",this.films )
-       
-            }).catch(e=>{
-                console.log("rerror: ",e);
-                this.error = true;
-            })
-            
+            this.loader = false;
+            this.getList();
         },
         methods: {
+            getList(){
+                axios.get('https://floating-sierra-20135.herokuapp.com/api/movies').then(response => {                    
+            
+                    this.films = response.data.data;
+                    console.log("this.films  ",this.films )
+        
+                }).catch(e=>{
+                    console.log("rerror: ",e);
+                    this.error = true;
+                })
+            },
             joinObject(array) {
 
                 let string ='';
@@ -91,24 +106,18 @@
                 
                 this.loader = true;
 
-                if(value == "original") {
+                if(value == "original") { // если отменены все параметры сортировки то заного вывожу изходный массив
 
-                    axios.get('https://floating-sierra-20135.herokuapp.com/api/movies').then(response => {
-                
-                        this.loader = false;
-                
-                        this.films = response.data.data;
-                        
-                    }).catch(e=>{console.log("rerror: ",e)})
+                    this.loader = false;
+                    this.getList();
                     
                 } else {
+                    this.films = value;
                     setTimeout(()=>{
                         this.loader = false;
-                        this.films = value;
                     },2000)
                     
                 }
-
            
             },
             linkFilm(id) {
@@ -116,6 +125,7 @@
                 let query = {
                         id:             this.films[id].id || false,
                         title:          this.films[id].title || false,
+                        poster:         this.getPoster(this.films[id].poster) || false,
                         year:           this.films[id].year || false,
                         genres:         this.films[id].genres || false,
                         directors:      this.films[id].directors || false,
@@ -133,6 +143,11 @@
                 return this.$router.push({ name: 'film', query });
 
              
+            },
+            getPoster(link) { // у постера битая ссылка, достаю из неё название  фотографии и генерирую актуальную ссылку 
+                link = link.split("/")[4]
+
+                return `http://st.kinopoisk.ru/images/film_big/${link}`
             }
         }
     }
